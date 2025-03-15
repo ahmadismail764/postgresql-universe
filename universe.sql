@@ -44,6 +44,41 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: filler_table; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.filler_table (
+    filler_table_id integer NOT NULL,
+    name character varying(30) NOT NULL,
+    col3 integer
+);
+
+
+ALTER TABLE public.filler_table OWNER TO freecodecamp;
+
+--
+-- Name: filler_table_filler_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
+--
+
+CREATE SEQUENCE public.filler_table_filler_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.filler_table_filler_id_seq OWNER TO freecodecamp;
+
+--
+-- Name: filler_table_filler_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
+--
+
+ALTER SEQUENCE public.filler_table_filler_id_seq OWNED BY public.filler_table.filler_table_id;
+
+
+--
 -- Name: galaxy; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
@@ -192,6 +227,13 @@ ALTER SEQUENCE public.star_star_id_seq OWNED BY public.star.star_id;
 
 
 --
+-- Name: filler_table filler_table_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.filler_table ALTER COLUMN filler_table_id SET DEFAULT nextval('public.filler_table_filler_id_seq'::regclass);
+
+
+--
 -- Name: galaxy galaxy_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
 --
 
@@ -217,6 +259,15 @@ ALTER TABLE ONLY public.planet ALTER COLUMN planet_id SET DEFAULT nextval('publi
 --
 
 ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.star_star_id_seq'::regclass);
+
+
+--
+-- Data for Name: filler_table; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.filler_table VALUES (1, 'Ahmad', 1);
+INSERT INTO public.filler_table VALUES (2, 'Ali', 2);
+INSERT INTO public.filler_table VALUES (3, 'Yahia', 3);
 
 
 --
@@ -288,6 +339,13 @@ INSERT INTO public.star VALUES (6, 'Proxima Centauri', 1, 120000, true);
 
 
 --
+-- Name: filler_table_filler_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
+--
+
+SELECT pg_catalog.setval('public.filler_table_filler_id_seq', 1, false);
+
+
+--
 -- Name: galaxy_galaxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
@@ -313,6 +371,14 @@ SELECT pg_catalog.setval('public.planet_planet_id_seq', 12, true);
 --
 
 SELECT pg_catalog.setval('public.star_star_id_seq', 6, true);
+
+
+--
+-- Name: filler_table filler_table_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.filler_table
+    ADD CONSTRAINT filler_table_pkey PRIMARY KEY (filler_table_id);
 
 
 --
@@ -377,6 +443,14 @@ ALTER TABLE ONLY public.star
 
 ALTER TABLE ONLY public.star
     ADD CONSTRAINT star_pkey PRIMARY KEY (star_id);
+
+
+--
+-- Name: filler_table unique_id; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.filler_table
+    ADD CONSTRAINT unique_id UNIQUE (filler_table_id);
 
 
 --
